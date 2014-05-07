@@ -124,10 +124,10 @@ static uint8_t target_flash_erase_chip(void) {
 
 static uint8_t check_security_bits(uint32_t flashAddr, uint8_t *data) {
     if (flashAddr == 0x400) {
-        if ((data[12] & NV_FSEC_MEEN_MASK) == 0x20) {
+        if ((data[12] & 0x30) == 0x20) {
             return 0; // mass erase disabled is set
         }
-        if ((data[12] & NV_FSEC_SEC_MASK) != 0x2) {
+        if ((data[12] & 0x3) != 0x2) {
             return 0; // security status is secured
         }
     }
